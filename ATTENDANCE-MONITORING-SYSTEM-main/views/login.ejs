@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="images/essu-logo.png">
+    <link rel="stylesheet" href="css/login.css">
+    <script src="java/login.js" defer></script>
+    <title>Login</title>
+</head>
+<body>
+
+    <div class="background">
+
+     <img src="images/background.webp" alt="bg">
+    </div>
+    <div class="login-container">
+        <div class="logo">
+            <img src="images/logo.png" alt="logo">
+            <div class="text">Attendance Monitoring System</div>
+        </div>
+        <div class="line"></div>
+        
+        <form action="/login" method="POST">
+            <h1>LOGIN</h1>
+
+
+
+            <ul>
+                <% if (messages.success_msg) { %>
+                    <li style="color: white; font-size: 18px; font-family: Arial, sans-serif;"><%= messages.success_msg %></li>
+                <% } %>
+            </ul>
+            
+            <ul>
+                <% if (messages.error) { %>
+                    <li style="color: red; font-size: 18px; font-family: 'Times New Roman', Times, serif;"><%= messages.error %></li>
+                <% } %>
+            </ul>
+            
+
+
+
+
+
+
+            <div class="username_studentNumber">
+                <input type="text" id="username_studentNumber" name="username" placeholder="Enter Username" required>
+            </div>
+            <div class="passwordLogin">
+                <input type="password" id="passwordLogin" name="password" placeholder="Password" required>
+            </div>
+<div id="usertype">
+            <label for="studentCheckbox" class="checkbox-label">
+                <input type="radio" id="studentCheckbox" name="usertype" class="studentCheckbox" value="student"> Student
+            </label>
+            
+            <label for="parentsCheckbox" class="checkbox-label" >
+                
+                <input type="radio" id="parentsCheckbox" name="usertype" value="parent"> Parent
+            </label>
+            
+            <label for="facultyCheckbox" class="checkbox-label">
+                <input type="radio" id="facultyCheckbox" name="usertype" value="faculty"> Faculty
+            </label>
+</div>
+            <button type="submit" id="loginButton" class="loginButton">LOGIN</button>
+            
+            <div class="login_register">
+                <p>Don't have an account?<a href="register" class="register-link">  Register</a></p>
+                <a href="/forgot-password" class="forgot-password-link">Forgot Password?</a>
+
+            </div>
+        </form>
+    </div>
+    <div class="hahahaha">
+
+    </div>
+</body>
+</html>

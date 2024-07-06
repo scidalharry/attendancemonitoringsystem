@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <!-- <link rel="stylesheet" href="https://cdn.example.com/fontawesome/css/all.css"> -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <link rel="shortcut icon" type="image/png" href="images/essu-logo.png">
+  <link rel="stylesheet" href="css/studentHome.css">
+  <script src="java/studentHome.js" defer></script>
+  <title>Faculty Home</title>
+</head>
+<body>
+  <div class="background">
+<img src="images/background.webp" alt="" srcset="">
+  </div>
+  <div class="sidebar">
+    <div class="logo-details">
+      <img src="images/essu-logo.png" alt="essu logo" class="logo-details__img">
+        <span class="logo-details__name">Attendance Monitoring System</span>
+      </div>
+    <div class="line"></div>
+
+    <ul class="nav-list">
+      <li class="nav-list__lists">
+        <a href="/home" class="page-main">
+          <i class="fas fa-home page-main--icon"></i> 
+          <span class="page-main--name">Home</span>
+        </a>
+      </li>
+      <li class="nav-list__lists">
+        <a href="/studenthome" class="page-main">
+          <i class="fas fa-user-graduate page-main--icon"></i>
+          <span class="page-main--name">Student</span>
+        </a>
+      </li>
+      <li class="nav-list__lists">
+        <a href="/MySubject" class="page-main">
+          <i class="fas fa-book page-main--icon"></i>
+          <span class="page-main--name">My Subjects</span>
+        </a>
+      </li>
+      <li class="nav-list__lists">
+        <a href="/account" class="page-main">
+          <i class="fas fa-user page-main--icon"></i>
+          <span class="page-main--name">Account Details</span>
+        </a>
+      </li>
+      <li class="nav-list__lists2">
+        <a href="/logout" class="page-main">
+          <i class="fas fa-sign-out-alt page-main--icon"></i> 
+          <span class="page-main--name">Log Out</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+ 
+  </div>
+  <div class="content-table-container">
+    <div class="table-header">
+<div class="search-bar">
+        <input type="text" placeholder="Search...">
+        <select id="yearFilter"> <!-- Added id to the select dropdown -->
+          <option value="all">All</option>
+          <option value="1">1st Year</option>
+          <option value="2">2nd Year</option>
+          <option value="3">3rd Year</option>
+          <option value="4">4th Year</option>
+        </select>
+        <button id="filterButton" class="filter-button" onclick="filterTable()">Filter</button> <!-- Added onclick event to trigger the filtering function -->
+      </div>
+      <button id="top-right-button" class="top-right-button">ADD NEW</button>
+      <button id="add-csv" class="add-csv">BULK ADD</button>
+      <!-- nabalhin na ngadto my subject ejs -->
+      <!-- <button id="addSubjectButton" class="top-right">ADD SUBJECT</button> --> 
+    </div>
+    
+    <div id="uploadModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Upload CSV File</h2>
+          <br>
+          <h2>Format:</h2>
+          <div class="container">
+            <div class="box">
+              
+
+               <img src="/images/image.png" > 
+            </div>
+
+          </div>
+         
+         
+          <form id="uploadForm" action="/upload/xlsx" method="POST" enctype="multipart/form-data">
+            <input type="file" name="xlsxFile">
+              <button type="submit">Upload</button>
+          </form>
+      </div>
+  </div>
+
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+          <span class="close" id="closeModalBtn">&times;</span>
+          <h2>Add Student</h2>
+          <form id="addStudentForm" action="/addStudent" method="POST" enctype="multipart/form-data" class="custom-form">
+            <label for="rfid">RFID:</label>
+            <input type="text" id="rfid" name="rfid" required readonly>
+  
+              <label for="studentNo">Student No.:</label>
+              <input type="text" id="studentNo" name="studentNo" required>
+  
+              <label for="studentName">Student Name:</label>
+              <input type="text" id="studentName" name="studentName" required>
+  
+              <label for="year">Year:</label>
+              <select id="year" name="year" required>
+                  <option value="">Select Year</option>
+                  <option value="1">1st Year</option>
+                  <option value="2">2nd Year</option>
+                  <option value="3">3rd Year</option>
+                  <option value="4">4th Year</option>
+              </select>
+  
+              <label for="section">Section:</label>
+              <select id="section" name="section" required>
+                  <option value="">Select Section</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                  <option value="D">D</option>
+              </select>
+
+              <label for="subject">Subject:</label>
+              <select id="subject" name="subject" required>
+                <option value="">Select Subject</option>
+                <% subjectList.forEach(subject => { %>
+                  <option value="<%= subject.subject_name %>"><%= subject.subject_name %></option>
+                <% }); %>
+              </select>
+              
+  
+              <label for="gender">Gender:</label>
+              <select id="gender" name="gender" required>
+                  <option value="">Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+              </select>
+              <div class="form-group">
+                <label for="image">Select Image</label>
+                <input type="file" name="image" class="form-control-file custom-file-input" id="image" required>
+            </div>
+  
+              <button type="submit">Add Student</button>
+          </form>
+      </div>
+  </div>
+
+  
+
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeEditBtn" onclick="closeEditModal()">&times;</span>
+        <form id="editForm" action="/updateStudent" method="POST"  enctype="multipart/form-data" class="custom-form">
+            <div id="hiddenSection">
+                <label for="id">ID:</label>
+                <input type="text" id="id" name="id" readonly><br><br>
+            </div>
+            <label for="editRfidCode">RFID Code:</label>
+            <input type="text" id="editRfidCode" name="rfid_code" required><br><br>
+
+            <label for="editStudentNumber">Student Number:</label>
+            <input type="text" id="editStudentNumber" name="student_number" required><br><br>
+
+            <label for="editStudentName">Student Name:</label>
+            <input type="text" id="editStudentName" name="student_name" required><br><br>
+            
+            
+
+            <label for="editYear">Year:</label>
+            <select id="editYear" name="year" required>
+                <option value="">Select Year</option>
+                <option value="1">1st Year</option>
+                <option value="2">2nd Year</option>
+                <option value="3">3rd Year</option>
+                <option value="4">4th Year</option>
+            </select><br><br>
+
+            <label for="editSection">Section:</label>
+            <select id="editSection" name="section" >
+                <option value="">Select Section</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+            </select><br><br>
+
+            <label for="subject">Subject:</label>
+            <input type="text" id="editSubject" name="subject" ><br>
+    
+
+            <label for="editGender">Gender:</label>
+            <select id="editGender" name="gender" required>
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select><br>
+
+            <div class="form-group">
+              <label for="image">Select Image</label>
+              <input type="file" name="image" class="form-control-file custom-file-input" id="image" required >
+          </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+
+
+  </div>
+  <div class="content-table">
+    <table id="data-table">
+      <thead>
+        <tr>
+          
+          <th>RFID CODE</th>
+          <th>STUDENT NO.</th>
+          <th>STUDENT NAME</th>
+          <th>Year & Section</th>
+          <th>Subject</th>
+          <th>GENDER</th>
+          <th>Absences</th>
+      
+          <!-- <th>NUMBER OF DAYS</th> -->
+          <th>ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"> <!-- Added id to the tbody -->
+        <% data.forEach(row => { %>
+        <tr>
+          <td><%= row.rfid_code %></td>
+          <td><%= row.student_number %></td>
+          <td onmouseover="displayImage('<%= row.image %>')" onmouseout="hideImage()"><%= row.student_name %></td>
+          <td><%= row.year %> <%= row.section %></td>
+          <td><%= row.subject %></td>
+          <td><%= row.gender %></td>
+          <td><%= row.absences %></td>
+          <td id="numOfDays">
+            <button class="edit-button" onclick="openEditModal('<%= row.id %>', '<%= row.rfid_code %>','<%= row.student_number %>','<%= row.student_name %>', '<%= row.year %>','<%= row.section %>','<%= row.subject %>','<%= row.gender %>')">Edit</button>
+            <button class="delete-button" onclick="deleteFunction('<%= row.id %>')">Delete</button>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+    <div id="image-popup">
+      <img id="popup-image" src="" alt="Popup Image">
+    </div>
+  </div>
+
+  <!-- nabalhin na ngadto my subject ejs -->
+  <!-- <div id="addSubjectModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeAddSubjectModal">&times;</span>
+        <h2>Add Subject</h2>
+        <form id="addSubjectForm" action="/addSubject" method="POST">
+            <label for="rfidCode">RFID Code:</label>
+            <input type="text" id="rfid_code"name="rfid_code" readonly >
+  
+          
+            <label for="subjectName">Subject Name:</label>
+            <input type="text" id="subjectName" name="subjectName" required><br>
+
+            <label for="section">Section:</label>
+            <input type="text" id="section" name="section" required><br><br>
+            <button type="submit">Add Subject</button>
+        </form>
+    </div>
+  </div> -->
+  
+ 
+</body>
+</html>
+</body>
+</html>

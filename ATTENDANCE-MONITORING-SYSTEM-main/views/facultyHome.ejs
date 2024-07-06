@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.example.com/fontawesome/css/all.css">
+  <link rel="shortcut icon" type="image/png" href="images/essu-logo.png">
+  <link rel="stylesheet" href="css/facultyHome.css">
+  <script src="java/facultyHome.js" defer></script>
+  <title>Faculty Home</title>
+</head>
+<body>
+  <div class="background">
+<img src="images/background.webp" alt="" srcset="">
+  </div>
+  <div class="sidebar">
+    <div class="logo-details">
+      <img src="images/essu-logo.png" alt="essu logo" class="logo-details__img">
+        <span class="logo-details__name">Attendance Monitoring System</span>
+      </div>
+    <div class="line"></div>
+
+    <ul class="nav-list">
+      <li class="nav-list__lists">
+        <a href="/home" class="page-main">
+          <i class="fas fa-home page-main--icon"></i> 
+          <span class="page-main--name">Home</span>
+        </a>
+      </li>
+      <li class="nav-list__lists">
+        <a href="/studenthome" class="page-main">
+          <i class="fas fa-user-graduate page-main--icon"></i>
+          <span class="page-main--name">Student</span>
+        </a>
+      </li>
+      <li class="nav-list__lists">
+        <a href="/MySubject" class="page-main">
+          <i class="fas fa-book page-main--icon"></i>
+          <span class="page-main--name">My Subjects</span>
+        </a>
+      </li>
+      <li class="nav-list__lists">
+        <a href="/account" class="page-main">
+          <i class="fas fa-user page-main--icon"></i>
+          <span class="page-main--name">Account Details</span>
+        </a>
+      </li>
+      <li class="nav-list__lists2">
+        <a href="/logout" class="page-main">
+          <i class="fas fa-sign-out-alt page-main--icon"></i> 
+          <span class="page-main--name">Log Out</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+ 
+
+
+  </div>
+  <div class="content-table">
+    <table id="data-table">
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Date</th>
+                <th>FullName</th>
+                <th>Year & Section</th>
+                <th>Student Number</th>
+                <th>Subject</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.forEach(row => { %>
+                <tr>
+                    <td><%= row.time %></td>
+                    <td><%= row.date %></td>
+                    <td><%= row.fullname %></td>
+                    <td> <%= row.year %> <%= row.section%></td>
+                    <td><%= row.student_number %></td>
+                    <td><%= row.subject %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <div class="buttons">
+        <button class="button" onclick="downloadExcel()">Convert to Excel</button>
+        <button class="button" onclick="clearTable()">Clear All</button>
+    </div>
+</div>
+
+</body>
+</html>
+</body>
+</html>

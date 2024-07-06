@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+
+  <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <!-- <link rel="stylesheet" href="https://cdn.example.com/fontawesome/css/all.css"> -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="shortcut icon" type="image/png" href="images/essu-logo.png">
+  <link rel="stylesheet" href="css/mysubject.css">
+  <script src="java/Mysubject.js" defer></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+  <title>Faculty Home</title>
+</head>
+<body>
+  <div class="background">
+<img src="images/background.webp" alt="" srcset="">
+  </div>
+  <div class="sidebar">
+    <div class="logo-details">
+      <img src="images/essu-logo.png" alt="essu logo" class="logo-details__img">
+        <span class="logo-details__name">Attendance Monitoring System</span>
+      </div>
+    <div class="line"></div>
+
+    <ul class="nav-list">
+      <li class="nav-list__lists">
+        <a href="/home" class="page-main">
+          <i class="fas fa-home page-main--icon"></i> 
+          <span class="page-main--name">Home</span>
+        </a>
+      </li>
+      <li class="nav-list__lists">
+        <a href="/studenthome" class="page-main">
+          <i class="fas fa-user-graduate page-main--icon"></i>
+          <span class="page-main--name">Student</span>
+        </a>
+      </li>
+      <li class="nav-list__lists">
+        <a href="/MySubject" class="page-main">
+          <i class="fas fa-book page-main--icon"></i>
+          <span class="page-main--name">My Subjects</span>
+        </a>
+      </li>
+      <li class="nav-list__lists">
+        <a href="/account" class="page-main">
+          <i class="fas fa-user page-main--icon"></i>
+          <span class="page-main--name">Account Details</span>
+        </a>
+      </li>
+      <li class="nav-list__lists2">
+        <a href="/logout" class="page-main">
+          <i class="fas fa-sign-out-alt page-main--icon"></i> 
+          <span class="page-main--name">Log Out</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="content-table-container">
+     
+      
+      <button id="addSubjectButton" class="top-right">ADD SUBJECT</button>
+  
+
+
+  </div>
+
+
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+        <span id = "close" class="close" onclick="closeEditModal()">&times;</span>
+        <form id="editForm" action="/updateSubject" method="POST">
+            <div id="hiddenSection">
+                <label for="id">ID:</label>
+                <input type="text" id="id" name="id" readonly><br><br>
+            </div>
+            <label for="editRfidCode">RFID Code:</label>
+            <input type="text" id="editRfidCode" name="rfid_code" required><br>
+
+            <label for="subject">Subject:</label>
+            <input type="text" id="subject" name="subject" ><br>
+
+            <label for="section">Section:</label>
+              <select id="editSection" name="section" required>
+                  <option value="">Select Section</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                  <option value="D">D</option>
+              </select><br>
+              <label for="days">Select Days of the Week:</label>
+              <select id="editDays" name="editDays" multiple style="width: 100%;">
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+              </select>
+              
+              <label for="start-time">Start Time:</label>
+              <input type="time" id="start-time" name="start-time">
+              <!-- <input type="time" id="start-time" name="start-time" onchange="updateHiddenStartTime()">
+              <input type="hidden" id="hidden-start-time" name="hidden-start-time">
+               -->
+              <label for="end-time">End Time:</label>
+              <input type="time" id="end-time" name="end-time">
+              <!-- <input type="time" id="end-time" name="end-time" onchange="updateHiddenEndTime()">
+              <input type="hidden" id="hidden-end-time" name="hidden-end-time"> -->
+              <button type="submit">Add Subject</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+  <div class="content-table">
+    <table id="data-table">
+      <thead>
+        <tr>
+          
+          <th>RFID CODE</th>
+          <th>SUBJECT NAME</th>
+          <th>SECTION</th>
+          <th>DAY</th>
+          <th>TIME</th>
+          <th>ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"> <!-- Added id to the tbody -->
+        <% subjects.forEach(row => { %>
+        <tr>
+          <td><%= row.rfid_code %></td>
+          <td><%= row.subject_name %></td>
+          <td><%= row.section %></td>
+          <td><%= row.day %></td>
+          <td><%=row.time_start %> - <%=row.time_end%></td>
+          
+
+          <td id="numOfDays">
+            <button id="edit-button" class="edit-button" onclick="openEditModal('<%= row.id %>', '<%= row.rfid_code %>', '<%= row.subject_name %>','<%= row.section %>', '<%= row.day %>', '<%= row.time_start %>', '<%= row.time_end %>' )">Edit</button>
+            <button class="delete-button" onclick="deleteFunction('<%= row.id %>')">Delete</button>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>      
+      
+    </table>
+
+   
+  
+    <div id="addSubjectModal" class="modal">
+      <div class="modal-content">
+          <span class="close" id="closeAddSubjectModal">&times;</span>
+          <h2>Add Subject</h2>
+          <form id="addSubjectForm" action="/addSubject" method="POST">
+              <label for="rfidCode">RFID Code:</label>
+              <input type="text" id="rfid_code"name="rfid_code" readonly >
+    
+            
+              <label for="subjectName">Subject Name:</label>
+              <input type="text" id="subjectName" name="subjectName" ><br>
+  
+                  <label for="section">Section:</label>
+              <select id="section" name="section" readonly>
+                  <option value="">Select Section</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                  <option value="D">D</option>
+              </select><br>
+              <label for="days">Select Days of the Week:</label>
+              <select id="days" name="days" multiple style="width: 100%;">
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+              </select>
+
+              <label for="start-time">Start Time:</label>
+              <input type="time" id="start-time" name="start-time">
+              <!-- <input type="time" id="start-time" name="start-time" onchange="updateHiddenStartTime()">
+              <input type="hidden" id="hidden-start-time" name="hidden-start-time"> -->
+              
+              <label for="end-time">End Time:</label>
+              <input type="time" id="end-time" name="end-time">
+              <!-- <input type="time" id="end-time" name="end-time" onchange="updateHiddenEndTime()">
+              <input type="hidden" id="hidden-end-time" name="hidden-end-time"> -->
+              <button type="submit">Add Subject</button>
+          </form>
+      </div>
+       
+
+  
+
+</body>
+</html>
+</body>
+</html>

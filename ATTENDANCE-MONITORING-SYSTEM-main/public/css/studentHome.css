@@ -1,0 +1,514 @@
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%
+}
+
+body {
+    font-family: Arial, sans-serif;
+ 
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    
+ 
+   
+    height: 100vh;
+    margin: 0;
+}
+.background {
+   
+    background-size: 50%; /* Paliitin ang background image upang itago ito sa 50% ng screen width */
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+}
+
+
+.green-top {
+    width: 100%;
+    height: 85px;
+    background: rgba(0, 100, 0, 0.75);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin-bottom: 515px;
+}
+
+.green-left {
+    width: 100px;
+    height: 100%;
+    background: rgba(0, 100, 0, 0.75);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    position: absolute;
+    
+    top: 0;
+    left: 0;
+}
+
+.green-top h1 {
+    color: white;
+    margin-right: 450px;
+}
+
+.logo img{
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
+    margin-top: 10px;
+    margin-left: -10px;
+}
+
+.home img{
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    margin-top: 10px;
+    margin-left: -10px;
+}
+
+.student img{
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    margin-top: 10px;
+    margin-left: -10px;
+}
+
+.sidebar {
+    width: 100px;
+    height: 100%;
+    background: white;
+    color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+}
+
+.logo-details {
+    padding: 20px;
+    text-align: center;
+}
+
+.logo-details__img {
+    max-width: 100%;
+}
+
+.logo-details__name {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.line {
+    width: 90px;
+    border-top: 1px solid green;
+    position: absolute;
+    margin-top: 2px;
+    margin-left: 5px;
+}
+
+.nav-list {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-list__lists {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.nav-list__lists2 {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    margin-top: 280px;
+}
+
+.page-main {
+    color: black;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    margin-top: 2px;
+    
+}
+
+.page-main--icon {
+    margin-right: 10px;
+    font-size: 2rem;
+    margin-top: 2px;
+}
+
+.page-main--name {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.nav-list__lists--right-icon {
+    font-size: 1.5rem;
+}
+
+.nav-list__lists--tooltip {
+    display: none;
+    position: absolute;
+    padding: 5px;
+    background: white;
+    border-radius: 5px;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+}
+
+
+
+
+.content-table {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: calc(100% - 100px); /* Adjust the width as needed, considering the width of the sidebar */
+    height: 100vh;
+    overflow: auto;
+    padding: 20px;
+    box-sizing: border-box;
+    background: rgb(223 223 223 / 80%);
+   
+}
+
+.content-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 50px;
+}
+
+.content-table th, .content-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.content-table th {
+    background-color: #f2f2f2;
+    margin-top: 20px;
+}
+
+.buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button {
+    flex: 1; /* Distribute available space equally between buttons */
+    margin-right: 10px; /* Add some space between buttons */
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #009879;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.content-table-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: calc(100% - 100px); /* Adjust the width as needed, considering the width of the sidebar */
+    height: 100vh;
+    overflow: auto;
+    padding: 20px;
+    box-sizing: border-box;
+   
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    z-index: 1;
+}
+
+.search-bar input {
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.filter-button {
+    padding: 2px 10px;
+    font-size: 16px;
+    background-color: #009879;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.filter-button:hover {
+    background-color: #125c4d;
+}
+.add-csv {
+    padding: 5px 5px;
+    font-size: 16px;
+    background-color: #009879;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1;
+    margin-right: 5px;
+    margin-top: -7px;
+}
+
+.top-right-button {
+    padding: 5px 5px;
+    font-size: 16px;
+    background-color: #009879;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1;
+    margin-left: 60%;
+    margin-top: -7px;
+}
+
+.top-right-button:hover {
+    background-color: #125c4d;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Style for the modal content */
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    width: 40%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+/* Style for the close button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #555;
+}
+
+/* Style for the form inside the modal */
+form {
+    display: grid;
+    gap: 10px;
+}
+
+label {
+    font-size: 16px;
+    margin-bottom: 3px;
+}
+
+input {
+    width: 100%;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button {
+    padding: 9px 15px;
+    font-size: 16px;
+    background-color: #009879;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #125c4d;
+}
+/* end of overlay guys */
+
+/* action button */
+td.configurationBtn{
+    display: flex;
+    justify-content: space-around;
+}
+
+td#numOfDays{
+    display:flex;
+    justify-content:space-around;
+}
+
+/* to hide the id field in modal */
+#hiddenSection {
+    display: none;
+}
+
+/* hover picture */
+#image-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    max-width: 400px; /* Set maximum width for the popup */
+  }
+  
+  #popup-image {
+    width: 100%; /* Set the width of the image to 100% of its container */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 400px; /* Set maximum height for the image */
+  }
+  .top-right{
+    padding: 5px 5px;
+    font-size: 16px;
+    background-color: #009879;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1;
+    margin-top: -19px;
+    margin-left: 50px;
+ }
+
+ /* Add subject Modal  */
+ /* Modal for adding subject */
+#addSubjectModal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Style for the modal content */
+#addSubjectModal .modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    width: 40%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+.container{
+    width: 90%;
+    padding: 20px;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.box {
+    width: 500px;
+    margin: 0 10px;
+    box-shadow: 0 0 20px 2px rgba(0, 0, 0, .1);
+}
+
+.box img{
+    display: block;
+    width: 100%;
+    border-radius: 5px;
+
+}
+.box:hover{
+    transform: scale(2.3);
+    z-index: 2;
+}
+
+/* Style for the close button */
+#addSubjectModal .close {
+    color: #aaa;
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#addSubjectModal .close:hover,
+#addSubjectModal .close:focus {
+    color: #555;
+}
+@media screen and (max-width: 693px) {
+    .search-bar {
+        flex-direction: column; /* Stack search bar items vertically */
+        align-items: flex-start; /* Align items to the start of the container */
+    }
+    
+    .search-bar input {
+        padding: 6px;
+        width: 138px;
+        margin-bottom: 10px; /* Add space between input and filter button */
+    }
+    
+    .filter-container {
+        display: flex; /* Make container a flexbox */
+        align-items: center; /* Align items vertically */
+        
+    }
+    
+    #yearFilter {
+        margin-right: 10px; /* Add space between year filter and filter button */
+    }
+    
+    #filterButton {
+        margin-top: 42px; /* Add space between filter button and other elements */
+       margin-left: 5em;
+       position: fixed;
+    }
+    
+    .top-right-button {
+        padding: 10px;
+        position: fixed; /* Keep button fixed for better usability */
+        bottom: 20px; /* Adjust position */
+        right: 10px; /* Adjust position */
+        margin-left: auto; /* Align to the right */
+    }
+
+    .content-table table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 85px;
+    }
+}
+

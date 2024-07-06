@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="images/essu-logo.png">
+    <link rel="stylesheet" href="css/register.css">
+    <script src="java/register.js" defer></script>
+    <title>Register</title>
+</head>
+<body>
+    <div class="background">
+        <img src="images/background.webp" alt="bg">
+    </div>
+    <div class="register-container">
+        <div class="logo">
+            <img src="images/logo.png" alt="logo">
+            <div class="text">Attendance Monitoring System</div>
+        </div>
+      
+        <div class="multi-step-form">
+            <form id="registrationForm" action="/register" method="POST">
+                <span class="close">&times;</span>
+                <h1>REGISTER</h1>
+                <div id="step1">
+                    <ul>
+                        <% if (typeof errors != 'undefined') { %>
+                            <% errors.forEach(error => { %>
+                                <li style="color: red; font-size: 16px; font-family: 'Times New Roman', Times, serif;"><%= error.message %></li>
+                            <% }) %>
+                        <% } %>
+                        <% if (typeof message != 'undefined') { %>
+                            <li style="color: red; font-size: 16px; font-family: 'Times New Roman', Times, serif;"><%= message %></li>
+                        <% } %>
+                    </ul>
+                    <!-- Selector for Faculty, Student, and Parent -->
+                    <div class="user-type">
+                        <label for="usertype">Select User Type:</label>
+                        <select id="usertype" name="usertype" required onchange="toggleStudentNumberField()">
+                            <option value="faculty">Faculty</option>
+                            <option value="student">Student</option>
+                            <option value="parent">Parent</option>
+                        </select>
+                    </div>
+                    <div class="username">
+                        <input type="text" id="username" name="username" placeholder="Enter Username" required>
+                    </div>
+                    <div class="password">
+                        <input type="password" id="password" name="password" placeholder="Password" required>
+                    </div>
+                    <div class="confirmPassword">
+                        <input type="password" id="confirmPassword" name="password2" placeholder="Confirm Password" required>
+                    </div>                    
+                   <button type="button" id="nextBtn" class="nextBtn" onclick="nextStep()">Next</button>
+
+                </div>
+                <div id="step2" style="display: none;">
+                    <br>
+                    <h2 class="color">Account Details</h2>
+                    <div class="firstname">
+                        <input type="text" id="firstname" name="firstname" placeholder="First Name" required>
+                    </div>
+                    <div class="lastname">
+                        <input type="text" id="lastname" name="lastname" placeholder="Last Name" required>
+                    </div>
+                    <div class="student-number" id="studentNumberField" style="display: none;">
+                        <input type="text" id="student_number" name="student_number" placeholder="Enter Student Number" >
+                    </div>
+                    
+                    <div class="recovery-email">
+                        <input type="email" id="recovery_email" name="recovery_email" placeholder="Recovery Email Address" required>
+                    </div>
+                    
+                    <div class="address">
+                        <input type="text" id="address" name="address" placeholder="Address" required>
+                    </div>
+                    <div class="age">
+                        <input type="text" id="age" name="age" placeholder="Age" required>
+                    </div>
+                    
+                    <select id="gender" name="gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                    <button type="button" class="prevBtn" onclick="prevStep()">Previous</button>
+                    <button type="submit" id="registerButton" class="registerButton">REGISTER</button>
+                </div>
+            </form>
+        </div>
+</body>
+</html>

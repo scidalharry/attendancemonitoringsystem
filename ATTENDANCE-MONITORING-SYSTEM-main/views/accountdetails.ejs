@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.example.com/fontawesome/css/all.css">
+  <link rel="shortcut icon" type="image/png" href="images/essu-logo.png"> 
+  <link rel="stylesheet" href="css/accountdetails.css"> 
+  <script src="java/accountdetails.js" defer></script>
+  <title>Account Details</title>
+ 
+</head>
+<body>
+
+  <div class="background">
+    <img src="images/background.webp" alt="" srcset="">
+  </div>
+  <button class="dropdown-btn" onclick="toggleNavList()">☰</button>
+
+  <div class="sidebar">
+    <div class="logo-details">
+      <img src="images/essu-logo.png" alt="essu logo" class="logo-details__img">
+      <span class="logo-details__name">Attendance Monitoring System</span>
+    </div>
+    <div class="line"></div>
+
+    <ul class="nav-list">
+      <li class="nav-list__lists">
+        <a href="/home" class="page-main">
+          <i class="fas fa-home page-main--icon"></i> 
+          <span class="page-main--name">Home</span>
+        </a>
+      </li>
+      <% if (userType === 'faculty') { %>
+        <li class="nav-list__lists">
+          <a href="/studenthome" class="page-main">
+            <i class="fas fa-user-graduate page-main--icon"></i>
+            <span class="page-main--name">Student</span>
+          </a>
+        </li>
+        <li class="nav-list__lists">
+          <a href="/MySubject" class="page-main">
+            <i class="fas fa-book page-main--icon"></i>
+            <span class="page-main--name">My Subjects</span>
+          </a>
+        </li>
+     
+      <% } else { %>
+        <!-- <li class="nav-list__lists">
+          <a href="/schedule" class="page-main">
+            <i class="fas fa-calendar-alt page-main--icon"></i>
+            <span class="page-main--name">Schedule</span>
+          </a>
+        </li> -->
+
+      <% } %>
+      <li class="nav-list__lists">
+        <a href="/account" class="page-main">
+          <i class="fas fa-user page-main--icon"></i>
+          <span class="page-main--name">Account Details</span>
+        </a>
+      </li>
+      <li class="nav-list__lists2">
+        <a href="/logout" class="page-main">
+          <i class="fas fa-sign-out-alt page-main--icon"></i> 
+          <span class="page-main--name">Log Out</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="content-table">
+    <div class="account-info">
+      <img src="images/download.png" alt="User Image" class="user-image">
+      <div class="info-container">
+          <h2>Account Information</h2>
+          <form id="account-details-form" action="/account" method="POST"> <!-- Form for editing account details -->
+            <div class="info-row">
+                <label for="first-name">First Name:</label>
+                <input type="text" id="first-name" name="firstName" value="<%= user.first_name %>" readonly required>
+            </div>
+            <div class="info-row">
+                <label for="last-name">Last Name:</label>
+                <input type="text" id="last-name" name="lastName" value="<%= user.last_name %>" readonly required>
+            </div>
+            <% if (userType === 'student') { %>
+              <div id="info-row" class="info-row">
+                <label for="student-number">Student Number:</label>
+                <input type="text" id="student-number" name="studentNumber" value="<%= user.student_number %>" readonly required>
+              </div>
+            <% } else { %>
+              <!-- Add fields for other user types if needed -->
+            <% } %>
+
+            <div class="info-row">
+              <label for="recovery_email">Recovery Email:</label>
+              <input type="text" id="recovery_email"name="recovery_email"  value="<%= user.recovery_email %>"readonly required>
+          </div>
+            <div class="info-row">
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" value="<%= user.address %>" readonly required>
+            </div>
+            <div class="info-row">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" value="<%= user.age %>" readonly required>
+            </div>
+            <div class="info-row">
+                <label for="gender">Gender:</label>
+                <input type="text" id="gender" name="gender" value="<%= user.gender %>" readonly required>
+            </div>
+            <div id="buttons-container">
+              <button type="button" id="edit-btn" onclick="toggleEdit()">Edit</button> <!-- Edit button -->
+              <button type="submit" id="save-btn" style="display: none;">Save</button> <!-- Save button (initially hidden) -->
+            </div>
+          </form>
+      </div>
+  </div>
+  </div>
+
+
+
+</body>
+</html>
